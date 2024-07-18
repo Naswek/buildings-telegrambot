@@ -36,7 +36,7 @@ user_game = {}
 user_start_message = {}
 
 
-# начало и выбор района
+# Запуск игры
 @bot.message_handler(commands=['start'])
 def start(message):
     global user_game
@@ -63,6 +63,7 @@ def start(message):
     start_game(message)
 
 
+# Завершение игры
 @bot.message_handler(commands=['stop'])
 def stop(message):
     global user_game
@@ -72,12 +73,12 @@ def stop(message):
         message.chat.id,
         emoji.emojize('Окей, тогда возвращайся, как станет скучно :waving_hand:')
     )
-
     user_start_message.pop(message.chat.id)
     user_game.pop(message.chat.id)
     bot.clear_step_handler(message)
 
 
+# Отдаем выбор района для игры
 def start_game(message):
     global user_game
     global user_start_message
@@ -103,7 +104,7 @@ def start_game(message):
     )
 
 
-# отправка вопрос и подсказок
+# Отправка загадки и подсказок
 @bot.callback_query_handler(func=lambda callback: True)
 def callback_message(callback):
     global user_game
@@ -172,7 +173,7 @@ def callback_message(callback):
     )
 
 
-# хэндер, принимающий фотку и скачивающий её
+# Обработка  фотографии пользователя и проверка ее на соответствие ответа
 @bot.message_handler(content_types=['photo'])
 def photo(message):
     file_id = message.photo[-1].file_id

@@ -1,0 +1,11 @@
+telebot
+random
+pyyaml
+emoji
+ultralytics
+Pillow
+yolo
+Pyrebase4
+pytorch==2.3.1
+
+
